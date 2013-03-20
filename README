@@ -1,0 +1,19 @@
+
+Compiling / testing with default compiler:
+
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+make
+# Run tests
+for t in ./src/test_*; do echo "$(tput bold)$t   Size: $(stat -c '%s' $t) bytes$(tput sgr0)"; ./$t; don
+
+Compiling / testing with clang:
+
+mkdir build-clang
+cd build-clang
+CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+make
+# Run tests
+for t in ./src/test_*; do echo "$(tput bold)$t   Size: $(stat -c '%s' $t) bytes$(tput sgr0)"; ./$t; don
+
