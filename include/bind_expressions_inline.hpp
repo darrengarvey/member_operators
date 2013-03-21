@@ -2,6 +2,8 @@
 #ifndef BIND_EXPRESSIONS_INLINE_INCLUDED
 #define BIND_EXPRESSIONS_INLINE_INCLUDED
 
+#include <boost/bind.hpp>
+
 template< typename T >
 void sort_less_than(T& types)
 {

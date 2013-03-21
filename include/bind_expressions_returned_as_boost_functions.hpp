@@ -3,6 +3,8 @@
 #define BIND_EXPRESSIONS_RETURNED_AS_BOOST_FUNCTIONS_INCLUDED
 
 #include "types.hpp"
+#include <boost/bind.hpp>
+#include <boost/function.hpp>
 
 namespace ops {
 

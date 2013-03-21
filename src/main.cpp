@@ -37,31 +37,6 @@
 
 using namespace boost::assign;
 
-//#if defined(TYPE1)
-//template<typename Struct, typename T>
-//struct OperatorWrapper
-//{
-//    typedef T (Struct::*member_ptr);
-//
-//    OperatorWrapper(T Struct::*member_ptr)
-//        : member(member_ptr)
-//    {
-//    }
-//
-//    bool operator()(const Struct& s1, const Struct& s2) const
-//    {
-//        return s1.*member < s2.*member;
-//    }
-//
-//    member_ptr member;
-//};
-//
-//template< typename T, typename Struct >
-//boost::function< bool(const Struct&, const Struct&) >
-//less_than(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T>(member_ptr);
-//}
 //#elif defined(TYPE7)
 //template<typename T, typename Struct, T Struct::*member_ptr>
 //struct OperatorWrapper
@@ -104,8 +79,6 @@ using namespace boost::assign;
 //{
 //    return OperatorWrapper<T, Struct, member_ptr>();
 //}
-//#elif defined(TYPE9)
-//// Nothing to see here. It's all inline below.
 //#elif defined(TYPE10)
 //#define BIND_MEMBER_OP(mem, op) \
 //    boost::bind(&mem, _1) op boost::bind(&mem, _2)
@@ -419,7 +392,7 @@ void print( vector<T>& stuff, V (T::* member_ptr) )
 }
 
 #ifndef MAX_ITERS
-#  define MAX_ITERS 10000000
+#  define MAX_ITERS 5000000
 #endif
 
 int main(int, char**)
@@ -449,9 +422,13 @@ int main(int, char**)
     boost::timer::auto_cpu_timer timer;
     for( int i=0; i < MAX_ITERS; ++i )
     {
+#if defined(LESS_THAN)
         sort_less_than( types );
+#elif defined(GREATER_THAN)
         sort_greater_than( types );
-        //sort_equal_to( types );
+#elif defined(EQUAL_TO)
+        sort_equal_to( types );
+#endif
 //#elif defined(TYPE7)
 //        sort( types.begin(), types.end(), less_than<string, Type, &Type::s>() );
 //        //less_than<string, Type, &Type::s>();
