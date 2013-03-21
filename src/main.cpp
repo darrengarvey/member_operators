@@ -29,6 +29,8 @@
 #  include "operator_wrapper_with_operator_templated_on_op_type_full_specialization.hpp"
 #elif defined(TYPE11) || defined(TYPE12) || defined(TYPE13)
 #  include "operator_wrapper_with_operator_selected_using_enum.hpp"
+#elif defined(TYPE14)
+#  include "operator_wrapper_clever_lookup.hpp"
 #endif
 
 #include "types.hpp"
@@ -271,143 +273,6 @@ using namespace boost::assign;
 //inline equal_to(T Struct::*member_ptr)
 //{
 //    return OperatorWrapper<Struct, T, EqualTo>(member_ptr);
-//}
-//
-//} // namespace ops
-//#elif defined(TYPE14)
-//namespace ops
-//{
-//enum OpType
-//{
-//    LessThan,
-//    GreaterThan,
-//    EqualTo
-//};
-//struct LessThanOp { enum { value = LessThan }; };
-//struct GreaterThanOp { enum { value = GreaterThan }; };
-//struct EqualToOp { enum { value = EqualTo }; };
-//
-//template<typename Struct, typename T, typename Op>
-//struct OperatorWrapper
-//{
-//    typedef T (Struct::* const member_ptr);
-//
-//    OperatorWrapper(T Struct::* const member_ptr)
-//        : member(member_ptr)
-//    {
-//    }
-//
-//    bool operator()(const Struct& s1, const Struct& s2) const
-//    {
-//        switch (static_cast<OpType>(Op::value))
-//        {
-//        case LessThan:
-//            return s1.*member < s2.*member;
-//        case GreaterThan:
-//            return s1.*member > s2.*member;
-//        case EqualTo:
-//            return s1.*member == s2.*member;
-//        default:
-//            return false;
-//        }
-//    }
-//
-//    const member_ptr member;
-//};
-//
-//template< typename T, typename Struct >
-//OperatorWrapper<Struct, T, LessThanOp>
-//inline less_than(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T, LessThanOp>(member_ptr);
-//}
-//
-//template< typename T, typename Struct >
-//OperatorWrapper<Struct, T, GreaterThanOp>
-//inline greater_than(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T, GreaterThanOp>(member_ptr);
-//}
-//
-//template< typename T, typename Struct >
-//OperatorWrapper<Struct, T, EqualToOp>
-//inline equal_to(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T, EqualToOp>(member_ptr);
-//}
-//
-//} // namespace ops
-//#elif defined(TYPE15) || defined(TYPE16) || defined(TYPE18)
-//namespace ops
-//{
-//enum OpType
-//{
-//    LessThan,
-//    GreaterThan,
-//    EqualTo
-//};
-//
-//template<typename Struct, typename T>
-//struct OperatorWrapper
-//{
-//    typedef T (Struct::* const member_ptr);
-//
-//    OperatorWrapper(T Struct::* const member_ptr, const enum OpType _op)
-//        : member(member_ptr)
-//        , op(_op)
-//    {
-//    }
-//
-//    bool operator()(const Struct& s1, const Struct& s2) const
-//    {
-//#if defined(TYPE15)
-//        return op == LessThan ? s1.*member < s2.*member
-//             : op == GreaterThan ? s1.*member > s2.*member
-//             : s1.*member == s2.*member;
-//#elif defined(TYPE16)
-//        bool result;
-//        switch(op)
-//        {
-//        case LessThan: result = s1.*member < s2.*member; break;
-//        case GreaterThan: result = s1.*member > s2.*member; break;
-//        case EqualTo: result = s1.*member == s2.*member; break;
-//        default: break;
-//        }
-//        return result;
-//#elif defined(TYPE18)
-//        switch(op)
-//        {
-//        case LessThan: return s1.*member < s2.*member;
-//        case GreaterThan: return s1.*member > s2.*member;
-//        case EqualTo: return s1.*member == s2.*member;
-//        default: return false;
-//        }
-//#endif
-//    }
-//
-//    const member_ptr member;
-//    const enum OpType op;
-//};
-//
-//template< typename T, typename Struct >
-//OperatorWrapper<Struct, T>
-//inline less_than(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T>(member_ptr, LessThan);
-//}
-//
-//template< typename T, typename Struct >
-//OperatorWrapper<Struct, T>
-//inline greater_than(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T>(member_ptr, GreaterThan);
-//}
-//
-//template< typename T, typename Struct >
-//OperatorWrapper<Struct, T>
-//inline equal_to(T Struct::*member_ptr)
-//{
-//    return OperatorWrapper<Struct, T>(member_ptr, EqualTo);
 //}
 //
 //} // namespace ops

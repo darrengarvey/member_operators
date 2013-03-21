@@ -105,3 +105,11 @@ target_link_libraries( test_operator_wrapper_with_operator_selected_using_enum3
     ${Boost_SYSTEM_LIBRARY}
 )
 
+add_executable( test_operator_wrapper_clever_lookup main.cpp )
+set_target_properties( test_operator_wrapper_clever_lookup
+    PROPERTIES COMPILE_DEFINITIONS TYPE14 )
+target_link_libraries( test_operator_wrapper_clever_lookup 
+    ${Boost_TIMER_LIBRARY}
+    ${Boost_SYSTEM_LIBRARY}
+)
+
