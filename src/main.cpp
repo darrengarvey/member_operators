@@ -424,9 +424,11 @@ int main(int, char**)
     {
 #if defined(LESS_THAN)
         sort_less_than( types );
-#elif defined(GREATER_THAN)
+#endif
+#if defined(GREATER_THAN)
         sort_greater_than( types );
-#elif defined(EQUAL_TO)
+#endif
+#if defined(EQUAL_TO)
         sort_equal_to( types );
 #endif
 //#elif defined(TYPE7)

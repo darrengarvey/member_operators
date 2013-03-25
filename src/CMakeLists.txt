@@ -25,6 +25,14 @@ function( make_test_executable arg1 arg2 )
         ${Boost_TIMER_LIBRARY}
         ${Boost_SYSTEM_LIBRARY}
     )
+
+    add_executable( test_multi_sort_${arg1} main.cpp )
+    set_target_properties( test_multi_sort_${arg1}
+        PROPERTIES COMPILE_DEFINITIONS "${arg2} -DLESS_THAN -DGREATER_THAN -DEQUAL_TO" )
+    target_link_libraries( test_multi_sort_${arg1}
+        ${Boost_TIMER_LIBRARY}
+        ${Boost_SYSTEM_LIBRARY}
+    )
 endfunction()
 
 make_test_executable( hard_coded_functions TYPE1 )

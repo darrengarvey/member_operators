@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tests="less_than greater_than equal_to"
+tests="multi_sort less_than greater_than equal_to"
 
 function get_sizes_for_compiler_and_test_set {
     compiler="$1"
