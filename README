@@ -1,19 +1,42 @@
 
-Compiling / testing with default compiler:
+Requires
+--------
 
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-make
-# Run tests
-for t in ./src/test_*; do echo "$(tput bold)$t   Size: $(stat -c '%s' $t) bytes$(tput sgr0)"; ./$t; don
+Boost 1.52+
+cmake
 
-Compiling / testing with clang:
+Compililation
+-------------
 
-mkdir build-clang
-cd build-clang
-CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-make
-# Run tests
-for t in ./src/test_*; do echo "$(tput bold)$t   Size: $(stat -c '%s' $t) bytes$(tput sgr0)"; ./$t; don
+./build.sh
+
+Run tests
+---------
+
+The point of this all is to see the effect on compiled size and runtime from
+different ways of implementing a lazy function / function object.
+
+To see compiled size:
+
+./get-sizes.sh
+
+To see running times:
+
+./run-tests.sh
+
+Example
+-------
+
+Here's what I get on my machine:
+
+$ uname -a
+Linux localhost.localdomain 3.8.3-203.fc18.i686.PAE #1 SMP Mon Mar 18 13:11:17 UTC 2013 i686 i686 i386 GNU/Linux
+
+$ gcc --version
+gcc (GCC) 4.7.2 20121109 (Red Hat 4.7.2-8)
+
+$ clang --version
+clang version 3.3 (trunk 177624)
+Target: i386-pc-linux-gnu
+Thread model: posix
 
