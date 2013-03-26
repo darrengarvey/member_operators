@@ -15,7 +15,7 @@ function run_tests_for_compiler_and_test_set {
     for t in build-${compiler}/src/test_${test_set}_*
     do
         result="$(./$t | tail -1 | awk '{print $1 "\t" $3 "\t" $6 "\t" $9}' | sed 's/s//g')"
-        echo -e "$compiler\t$test_set\t$result\t$t"
+        echo -e "$compiler\t$test_set\t$result\t${t#*test_${test_set}_}"
     done
 }
 
